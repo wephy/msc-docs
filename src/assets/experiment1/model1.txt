@@ -1,0 +1,33 @@
+c = Constants(
+    domain=RectangularDomainND,
+    domain_init_kwargs = dict(
+        xmin=np.array([XMIN, TMIN]),
+        xmax=np.array([XMAX, TMAX])
+        ),
+    problem=BurgersEquation2D,
+    problem_init_kwargs = dict(
+        ),
+    network=AdaptiveFCN,
+    network_init_kwargs = dict(
+        layer_sizes = (2, 20, 20, 20, 20, 1),
+    ),
+    ns=((2**17, 1),),
+    n_test=(512, 256),
+    test_freq=1000 / 2,
+
+    resample_every_step=True, # Enable on-the-fly generation
+    resample_frequency=50,
+    sampler="uniform", # Make sure to use a fast sampler
+    
+    optimiser_schedule=[
+        (optax.adam, 50000, dict(
+            learning_rate=1e-3,
+        )),
+    ],
+    model_save_freq=1e10
+)
+
+run = PINNTrainer(c)
+all_params = run.train()
+
+17m 50s

@@ -14,6 +14,13 @@ export default defineConfig({
 			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/withastro/starlight' }],
 			sidebar: [
 				{
+					label: 'Experiments',
+					items: [
+						// Each item here is one entry in the navigation menu.
+						{ label: 'Adam + LBFGS, Varying memory', slug: 'experiments/test'},
+					],
+				},
+				{
 					label: 'Notes',
 					items: [
 						// Each item here is one entry in the navigation menu.
